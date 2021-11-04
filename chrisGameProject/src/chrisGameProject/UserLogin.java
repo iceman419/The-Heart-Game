@@ -93,9 +93,10 @@ public class UserLogin extends JFrame {
 		
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.addActionListener(new ActionListener() {
+			
 			// password decryption
 			private static String hash(String data) {
-				String dehashed = "";
+				String hashed = "";
 				try {
 					MessageDigest md5 = MessageDigest.getInstance("MD5");
 					md5.update(data.getBytes());
@@ -104,22 +105,21 @@ public class UserLogin extends JFrame {
 					for (int i = 0; i< byteData.length; i++) {
 						sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
 					}
-					dehashed = sb.toString();
+					hashed = sb.toString();
 				}catch (NoSuchAlgorithmException e) {
 					
 				}
-				return dehashed;
+				return hashed;
 			}// password decryption ENDS
+			
 		@SuppressWarnings("deprecation")
 		public void actionPerformed(ActionEvent e) {
-			    String username = usernameTF.getText();
-				String password = passwordPF.getText();
-				String pass = hash (password);//password encryption
+
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gamepdb","root","");
 				Statement stat = con.createStatement();
-				String sql = "select * from user_details where username='"+usernameTF.getText()+"' and password = '"+passwordPF.getText().toString()+"'";
+				String sql = "select * from user_details where username='"+usernameTF.getText()+"' and password = '"+hash(passwordPF.getText())+"'";
 				ResultSet rs = stat.executeQuery(sql);
 				if(rs.next()) {
 					//JOptionPane.showMessageDialog(null,"Welcome" + " " + usernameTF.getText()+" " + "to Heart Game");
