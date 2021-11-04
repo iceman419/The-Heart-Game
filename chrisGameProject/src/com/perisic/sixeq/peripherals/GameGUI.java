@@ -99,7 +99,7 @@ public class GameGUI extends JFrame implements ActionListener {
 		highScoreinfoArea.setText("");
 		
 		java.util.Timer timer = new java.util.Timer();// new timer
-		counter = 60; // setting the counter to 20 seconds
+		counter = 2; // setting the counter to 20 seconds
 		TimerTask task = new TimerTask() {
 			public void run() {
 				infoRemainTime.setText(Integer.toString(counter));// the timer label to counter
@@ -107,8 +107,19 @@ public class GameGUI extends JFrame implements ActionListener {
 				if (counter == -1) {
 					timer.cancel();
 					Icon icon = new javax.swing.ImageIcon(getClass().getResource("EndGame.jpg"));
-					JOptionPane.showMessageDialog(null,"Oops! You Ran Out Of Time!!", "Game Over", JOptionPane.INFORMATION_MESSAGE,icon);
-					System.exit(ABORT);
+					//JOptionPane.showMessageDialog(null,"Oops! You Ran Out Of Time!!", "Game Over", JOptionPane.INFORMATION_MESSAGE,icon);
+					int tryAgain = JOptionPane.showConfirmDialog(null,"Do You Want to Try Again", "Time Out!" + " Sorry You Ran Out Of Time",JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,icon);
+					if(tryAgain == JOptionPane.YES_OPTION) {
+						
+						GameGUI myGUI = new GameGUI();
+						myGUI.setLocationRelativeTo(null);
+						myGUI.setVisible(true);
+						
+					}else {
+						System.exit(ABORT);
+						
+					}
+					
 
 				}
 				else if(isIt) {

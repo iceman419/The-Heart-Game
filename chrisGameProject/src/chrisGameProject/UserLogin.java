@@ -122,15 +122,19 @@ public class UserLogin extends JFrame {
 				String sql = "select * from user_details where username='"+usernameTF.getText()+"' and password = '"+hash(passwordPF.getText())+"'";
 				ResultSet rs = stat.executeQuery(sql);
 				if(rs.next()) {
-					//JOptionPane.showMessageDialog(null,"Welcome" + " " + usernameTF.getText()+" " + "to Heart Game");
 					Icon icon = new javax.swing.ImageIcon(getClass().getResource("Wellcome Heart.png"));
-					JOptionPane.showMessageDialog(null, usernameTF.getText(), "Welcome To Heart Game", JOptionPane.INFORMATION_MESSAGE,icon);
+					JOptionPane.showMessageDialog(null,usernameTF.getText() +" Your Login Was Successful!!", "Authentication", JOptionPane.INFORMATION_MESSAGE,icon);
+					//JOptionPane.showMessageDialog(null, usernameTF.getText(), "Welcome To Heart Game", JOptionPane.INFORMATION_MESSAGE,icon);
+					
                     dispose();
+                    
+                    UserCookies UCookies = new UserCookies();
+                    UCookies.setLocationRelativeTo(null);
+                    UCookies.setVisible(true);
 
-
-	    		GameGUI myGUI = new GameGUI();
-	    		myGUI.setLocationRelativeTo(null);
-	    		myGUI.setVisible(true);
+	    		//GameGUI myGUI = new GameGUI();
+	    		//myGUI.setLocationRelativeTo(null);
+	    		//myGUI.setVisible(true);
 
 				}else {
 					if(usernameTF.getText().isEmpty() ||passwordPF.getText().isEmpty())
@@ -203,11 +207,6 @@ public class UserLogin extends JFrame {
 		btnHome.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnHome.setBounds(171, 291, 215, 38);
 		contentPane.add(btnHome);
-		
-		JButton btnPlay = new JButton("Play");
-		btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnPlay.setBounds(436, 241, 85, 77);
-		contentPane.add(btnPlay);
 	}
 }
 
