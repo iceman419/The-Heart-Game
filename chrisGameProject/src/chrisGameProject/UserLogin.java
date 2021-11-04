@@ -178,7 +178,7 @@ public class UserLogin extends JFrame {
 			}
 		});
 		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton_2.setBounds(171, 260, 215, 38);
+		btnNewButton_2.setBounds(171, 247, 215, 38);
 		contentPane.add(btnNewButton_2);
 		
 		passwordPF = new JPasswordField();
@@ -189,9 +189,26 @@ public class UserLogin extends JFrame {
 		passwordPF.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		passwordPF.setBounds(171, 141, 215, 32);
 		contentPane.add(passwordPF);
+		
+		JButton btnHome = new JButton("Home");
+		btnHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				MainScreen frame = new MainScreen();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+			
+			}
+		});
+		btnHome.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnHome.setBounds(171, 291, 215, 38);
+		contentPane.add(btnHome);
+		
+		JButton btnPlay = new JButton("Play");
+		btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnPlay.setBounds(436, 241, 85, 77);
+		contentPane.add(btnPlay);
 	}
-
-
 }
 
 
