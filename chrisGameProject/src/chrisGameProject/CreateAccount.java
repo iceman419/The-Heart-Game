@@ -191,7 +191,7 @@ public class CreateAccount extends JFrame {
 								      infoMassage("Details Successfully Registered","Alert!!");
 							    		dispose();
 										UserLogin ul = new UserLogin();
-										ul.setLocationRelativeTo(null);
+										ul.setLocationRelativeTo(null);										
 										ul.setVisible(true);
 								      
 					    		}

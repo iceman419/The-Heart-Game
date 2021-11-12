@@ -24,6 +24,7 @@ public class UserCookies extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -40,6 +41,7 @@ public class UserCookies extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public UserCookies() {
 		setTitle("Cookies");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,9 +55,16 @@ public class UserCookies extends JFrame {
 		JButton btnPlay = new JButton("Play");
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GameGUI myGUI = new GameGUI();
-	    		myGUI.setLocationRelativeTo(null);
-	    		myGUI.setVisible(true);
+				dispose();
+				DemoGUI dmGUI = new DemoGUI();
+				dmGUI.setLocationRelativeTo(null);
+				dmGUI.setVisible(true);
+				
+				
+				//GameGUI myGUI = new GameGUI();
+	    		//myGUI.setLocationRelativeTo(null);
+	    		//myGUI.setVisible(true);
+
 			}
 		});
 		btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 18));

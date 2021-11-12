@@ -3,10 +3,19 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
 import java.util.TimerTask;
 import javax.swing.*;
+
+import com.perisic.sixeq.engine.Game;
 import com.perisic.sixeq.engine.GameEngine;
+import java.awt.Desktop;
+
+
+import chrisGameProject.MainScreen;
+import chrisGameProject.UserCookies;
 
 
 /**
@@ -22,14 +31,12 @@ public class GameGUI extends JFrame implements ActionListener {
 	/**
 	 * Method that is called when a button has been pressed.
 	 */
-	
 	//Variable for the timer
      int counter = 0;
      Boolean isIt = false;
      
-    
-      
      
+    
  	
 	
 	@Override
@@ -61,6 +68,7 @@ public class GameGUI extends JFrame implements ActionListener {
 	JTextArea infoRemainTime = null;
 	JTextArea highScoreinfoArea = null;
 	
+	
 /**
  * Initializes the game. 
  * @param player
@@ -72,6 +80,9 @@ public class GameGUI extends JFrame implements ActionListener {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(204, 204, 255));
 		
+		
+		
+
 		// Displays the Time Left
 		JLabel lblNewLabel_2 = new JLabel("Time Left:-");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -90,6 +101,8 @@ public class GameGUI extends JFrame implements ActionListener {
 		
 		highScoreinfoArea = new JTextArea(1, 30);
 		
+		
+		
 		infoArea.setEditable(false);
 		infoArea.setText("What is the value of the Heart?   Score: 0");
 		
@@ -99,7 +112,7 @@ public class GameGUI extends JFrame implements ActionListener {
 		highScoreinfoArea.setText("");
 		
 		java.util.Timer timer = new java.util.Timer();// new timer
-		counter = 2; // setting the counter to 20 seconds
+		counter = 30; // setting the counter to 20 seconds
 		TimerTask task = new TimerTask() {
 			public void run() {
 				infoRemainTime.setText(Integer.toString(counter));// the timer label to counter
@@ -116,7 +129,11 @@ public class GameGUI extends JFrame implements ActionListener {
 						myGUI.setVisible(true);
 						
 					}else {
-						System.exit(ABORT);
+						dispose();
+						UserCookies UCookies = new UserCookies();
+						UCookies.setVisible(true);
+						UCookies.setLocationRelativeTo(null);
+						//System.exit(ABORT);
 						
 					}
 					
@@ -170,6 +187,39 @@ public class GameGUI extends JFrame implements ActionListener {
 
 		getContentPane().add(panel);
 		panel.repaint();
+		
+		
+		
+		
+		JButton btnlogOut = new JButton("Log out");
+		btnlogOut.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnlogOut.setForeground(Color.black);
+		btnlogOut.setBounds(22, 405, 91, 25);
+		panel.add(btnlogOut);
+		
+		btnlogOut.addActionListener(new ActionListener() {
+			Icon icon = new javax.swing.ImageIcon(getClass().getResource("Wellcome Heart.png"));
+			public void actionPerformed(ActionEvent e) {int option = JOptionPane.showConfirmDialog(null,"Are you Sure You Want to Logged Out!", "You Are About to Logout!",JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,icon);
+			if(option == JOptionPane.YES_OPTION) {
+				timer.cancel();
+				dispose();
+				JOptionPane.showMessageDialog(null," Your Have Successful Logged Out!!", "Authentication", JOptionPane.INFORMATION_MESSAGE,icon);
+				MainScreen frame = new MainScreen();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				
+				
+			}else {
+				
+				
+				
+			}
+				
+				
+
+			}
+		});
+
 
 	}
 /**
@@ -194,12 +244,22 @@ public class GameGUI extends JFrame implements ActionListener {
 	 * Main entry point into the equation game.
 	 * 
 	 * @param args not used.
+	 * @throws URISyntaxException 
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	 
+
+	
+	public static void main(String[] args)  {
 	
 		GameGUI myGUI = new GameGUI();
 		myGUI.setLocationRelativeTo(null);
 		myGUI.setVisible(true);
+		
+
+		
+
+
 	}
 	
 }

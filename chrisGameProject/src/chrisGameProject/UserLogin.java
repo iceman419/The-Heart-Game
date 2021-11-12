@@ -4,10 +4,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import com.perisic.sixeq.peripherals.GameGUI;
+
+import chrriis.dj.nativeswing.swtimpl.NativeInterface;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -19,6 +23,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+
+import java.awt.BorderLayout;
 import java.awt.Color;
 
 
@@ -127,14 +133,32 @@ public class UserLogin extends JFrame {
 					//JOptionPane.showMessageDialog(null, usernameTF.getText(), "Welcome To Heart Game", JOptionPane.INFORMATION_MESSAGE,icon);
 					
                     dispose();
-                    
-                    UserCookies UCookies = new UserCookies();
-                    UCookies.setLocationRelativeTo(null);
-                    UCookies.setVisible(true);
+                   
+                    NativeInterface.open();
+    				JFrame sdf = new JFrame("Heart Game Demo");
+    				sdf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
+    				sdf.getContentPane().add(DemoDisplay.getBrowser(),BorderLayout.CENTER); 
+    				sdf.setBounds(350, 150, 690, 400);
+    				sdf.setVisible(true);
+    			
+            		
+            		JButton button = new JButton("Skip Demo");
+                    button.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                    sdf.dispose();
+                    GameGUI myGUI = new GameGUI();
+                    myGUI.setLocationRelativeTo(null);
+                    myGUI.setVisible(true);
+                    	    		
+                	}
+                    	});
+                    		
+            		sdf.getContentPane().add(button,BorderLayout.EAST);
+            		button.setFont(new Font("Tahoma", Font.PLAIN, 18));
+            		button.setForeground(Color.black);
+            		button.setBackground(new Color(204, 204, 255));
+            		sdf.setVisible(true);
 
-	    		//GameGUI myGUI = new GameGUI();
-	    		//myGUI.setLocationRelativeTo(null);
-	    		//myGUI.setVisible(true);
 
 				}else {
 					if(usernameTF.getText().isEmpty() ||passwordPF.getText().isEmpty())
