@@ -3,10 +3,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import com.perisic.sixeq.peripherals.GameGUI;
-
-import chrriis.dj.nativeswing.swtimpl.NativeInterface;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Font;
@@ -22,8 +18,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
 
 
@@ -52,6 +46,7 @@ public class UserLogin extends JFrame {
 					
 					UserLogin frame = new UserLogin();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -80,14 +75,14 @@ public class UserLogin extends JFrame {
 		lblNewLabel.setBounds(211, 10, 163, 38);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Username");
+		JLabel lblNewLabel_1 = new JLabel("Username or Email");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_1.setBounds(71, 80, 98, 32);
+		lblNewLabel_1.setBounds(61, 83, 151, 32);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Password");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_2.setBounds(71, 146, 89, 22);
+		lblNewLabel_2.setBounds(136, 144, 76, 27);
 		contentPane.add(lblNewLabel_2);
 		
 		usernameTF = new JTextField();
@@ -96,7 +91,7 @@ public class UserLogin extends JFrame {
 			}
 		});
 		usernameTF.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		usernameTF.setBounds(171, 83, 215, 32);
+		usernameTF.setBounds(222, 83, 215, 32);
 		contentPane.add(usernameTF);
 		usernameTF.setColumns(10);
 		
@@ -129,7 +124,7 @@ public class UserLogin extends JFrame {
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gamepdb","root","");
 				Statement stat = con.createStatement();
 				String username = usernameTF.getText();
-				String sql = "select * from user_details where username='"+username+"' and password = '"+hash(passwordPF.getText())+"'";
+				String sql = "select * from user_details where username='"+username+"'|| email_id='"+username+"' and password = '"+hash(passwordPF.getText())+"'";
 				ResultSet rs = stat.executeQuery(sql);
 				if(rs.next()) {
 					Icon icon = new javax.swing.ImageIcon(getClass().getResource("Wellcome Heart.png"));
@@ -137,33 +132,9 @@ public class UserLogin extends JFrame {
 					//JOptionPane.showMessageDialog(null, usernameTF.getText(), "Welcome To Heart Game", JOptionPane.INFORMATION_MESSAGE,icon);
 					
                     dispose();
-                  
-                    NativeInterface.open();
-    				JFrame sdf = new JFrame("Heart Game Demo");
-    				sdf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
-    				sdf.getContentPane().add(DemoDisplay.getBrowser(),BorderLayout.CENTER); 
-    				sdf.setBounds(350, 150, 690, 400);
-    				sdf.setVisible(true);
-    			
-            		
-            	    JButton button = new JButton("Skip Demo");
-                    button.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                    sdf.dispose();
-                    
-            		GameGUI myGUI = new GameGUI();
-            		myGUI.setLocationRelativeTo(null);
-            		myGUI.setVisible(true);
-                    	    		
-                	}
-                    	});
-                    		
-            		sdf.getContentPane().add(button,BorderLayout.EAST);
-            		button.setFont(new Font("Tahoma", Font.PLAIN, 18));
-            		button.setForeground(Color.black);
-            		button.setBackground(new Color(204, 204, 255));
-            		sdf.setVisible(true);
-
+					UserCookies UCookies = new UserCookies();
+					UCookies.setVisible(true);
+					UCookies.setLocationRelativeTo(null);
 
 				}else {
 					if(usernameTF.getText().isEmpty() ||passwordPF.getText().isEmpty())
@@ -186,7 +157,7 @@ public class UserLogin extends JFrame {
 		
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton.setBounds(171, 205, 85, 32);
+		btnNewButton.setBounds(222, 205, 85, 32);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Reset");
@@ -198,7 +169,7 @@ public class UserLogin extends JFrame {
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton_1.setBounds(301, 205, 85, 32);
+		btnNewButton_1.setBounds(352, 205, 85, 32);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Create Account");
@@ -211,7 +182,7 @@ public class UserLogin extends JFrame {
 			}
 		});
 		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton_2.setBounds(171, 247, 215, 38);
+		btnNewButton_2.setBounds(222, 243, 215, 38);
 		contentPane.add(btnNewButton_2);
 		
 		passwordPF = new JPasswordField();
@@ -220,7 +191,7 @@ public class UserLogin extends JFrame {
 			}
 		});
 		passwordPF.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		passwordPF.setBounds(171, 141, 215, 32);
+		passwordPF.setBounds(222, 141, 215, 32);
 		contentPane.add(passwordPF);
 		
 		JButton btnHome = new JButton("Home");
@@ -234,7 +205,7 @@ public class UserLogin extends JFrame {
 			}
 		});
 		btnHome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnHome.setBounds(171, 291, 215, 38);
+		btnHome.setBounds(222, 291, 215, 38);
 		contentPane.add(btnHome);
 	}
 }

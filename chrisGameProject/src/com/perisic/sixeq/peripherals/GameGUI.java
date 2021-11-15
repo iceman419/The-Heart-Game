@@ -87,7 +87,7 @@ public class GameGUI extends JFrame implements ActionListener {
 		
 		infoRemainTime = new JTextArea(1, 2);
 		
-		usernameDisplay = new JTextArea(1, 10);
+		usernameDisplay = new JTextArea(1, 30);
 		
 		infoArea.setEditable(false);
 		infoArea.setFont(new Font("Tahoma", Font.BOLD, 12));

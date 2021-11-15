@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import com.perisic.sixeq.peripherals.GameGUI;
+import java.awt.BorderLayout;
+import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -31,6 +33,7 @@ public class UserCookies extends JFrame {
 				try {
 					UserCookies UCookies = new UserCookies();
 					UCookies.setVisible(true);
+					UCookies.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -55,11 +58,38 @@ public class UserCookies extends JFrame {
 		JButton btnPlay = new JButton("Play");
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
 				
-				GameGUI myGUI = new GameGUI();
-	    		myGUI.setLocationRelativeTo(null);
-	    		myGUI.setVisible(true);
+				NativeInterface.open();
+				JFrame sdf = new JFrame("Heart Game Demo");
+				sdf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
+				sdf.getContentPane().add(DemoDisplay.getBrowser(),BorderLayout.CENTER); 
+				sdf.setBounds(350, 150, 690, 400);
+				sdf.setVisible(true);
+			
+        		
+        	    JButton button = new JButton("Skip Demo");
+                button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                sdf.dispose();
+                
+        		GameGUI myGUI = new GameGUI();
+        		myGUI.setLocationRelativeTo(null);
+        		myGUI.setVisible(true);
+                	    		
+            	}
+                	});
+               		
+       		    sdf.getContentPane().add(button,BorderLayout.EAST);
+        		button.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        		button.setForeground(Color.black);
+		        button.setBackground(new Color(204, 204, 255));
+        		sdf.setVisible(true);
+				
+//				dispose();
+//				
+//				GameGUI myGUI = new GameGUI();
+//	    		myGUI.setLocationRelativeTo(null);
+//	    		myGUI.setVisible(true);
 
 			}
 		});
@@ -81,5 +111,17 @@ public class UserCookies extends JFrame {
 		btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnLogout.setBounds(136, 175, 179, 78);
 		contentPane.add(btnLogout);
+		
+		JButton btnscoreBoard = new JButton("View Score Board");
+		btnscoreBoard.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ScoreBoard frame = new ScoreBoard();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+			}
+		});
+		btnscoreBoard.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnscoreBoard.setBounds(10, 6, 416, 46);
+		contentPane.add(btnscoreBoard);
 	}
 }

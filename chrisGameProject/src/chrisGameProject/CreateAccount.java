@@ -43,6 +43,7 @@ public class CreateAccount extends JFrame {
 				try {
 					CreateAccount frame = new CreateAccount();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -193,7 +194,7 @@ public class CreateAccount extends JFrame {
 			 Class.forName("com.mysql.cj.jdbc.Driver");
 		 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gamepdb","root","");
 		 Statement stat = con.createStatement();
-	     String sql = "select * from user_details where username='"+usernameTF.getText()+"' and password='"+passwordPF.getText().toString()+"'";
+	     String sql = "select * from user_details where username='"+usernameTF.getText()+"'&& email_id= '"+emailTF.getText()+"' and password='"+passwordPF.getText().toString()+"'";
 		 ResultSet rs = stat.executeQuery(sql);
 		 if(rs.next()) //checking before inserting to stop duplicated entries
 		 {
