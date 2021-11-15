@@ -48,7 +48,7 @@ public class UserCookies extends JFrame {
 	public UserCookies() {
 		setTitle("Cookies");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 688, 436);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(204, 204, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -58,6 +58,7 @@ public class UserCookies extends JFrame {
 		JButton btnPlay = new JButton("Play");
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				
 				NativeInterface.open();
 				JFrame sdf = new JFrame("Heart Game Demo");
@@ -93,8 +94,8 @@ public class UserCookies extends JFrame {
 
 			}
 		});
-		btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnPlay.setBounds(136, 62, 179, 78);
+		btnPlay.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnPlay.setBounds(240, 21, 179, 78);
 		contentPane.add(btnPlay);
 		
 		JButton btnLogout = new JButton("Logout");
@@ -108,20 +109,34 @@ public class UserCookies extends JFrame {
 				frame.setLocationRelativeTo(null);
 			}
 		});
-		btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnLogout.setBounds(136, 175, 179, 78);
+		btnLogout.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnLogout.setBounds(240, 311, 179, 78);
 		contentPane.add(btnLogout);
 		
-		JButton btnscoreBoard = new JButton("View Score Board");
+		JButton btnscoreBoard = new JButton("Score Board");
 		btnscoreBoard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				ScoreBoard frame = new ScoreBoard();
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 			}
 		});
-		btnscoreBoard.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnscoreBoard.setBounds(10, 6, 416, 46);
+		btnscoreBoard.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnscoreBoard.setBounds(240, 109, 179, 78);
 		contentPane.add(btnscoreBoard);
+		
+		JButton btnNewButton = new JButton("My Score");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				MyScore frame = new MyScore();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnNewButton.setBounds(240, 207, 179, 78);
+		contentPane.add(btnNewButton);
 	}
 }

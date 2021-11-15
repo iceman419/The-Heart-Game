@@ -71,18 +71,18 @@ public class UserLogin extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("User Login");
-		lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 24));
+		lblNewLabel.setFont(new Font("Verdana", Font.BOLD, 24));
 		lblNewLabel.setBounds(211, 10, 163, 38);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Username or Email");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_1.setBounds(61, 83, 151, 32);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_1.setBounds(36, 83, 176, 32);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Password");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_2.setBounds(136, 144, 76, 27);
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_2.setBounds(104, 144, 108, 27);
 		contentPane.add(lblNewLabel_2);
 		
 		usernameTF = new JTextField();
@@ -156,7 +156,7 @@ public class UserLogin extends JFrame {
 		    
 		
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnNewButton.setBounds(222, 205, 85, 32);
 		contentPane.add(btnNewButton);
 		
@@ -168,8 +168,8 @@ public class UserLogin extends JFrame {
 	    		
 			}
 		});
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton_1.setBounds(352, 205, 85, 32);
+		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnNewButton_1.setBounds(330, 205, 107, 32);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Create Account");
@@ -181,7 +181,7 @@ public class UserLogin extends JFrame {
 				ca.setVisible(true);
 			}
 		});
-		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnNewButton_2.setBounds(222, 243, 215, 38);
 		contentPane.add(btnNewButton_2);
 		
@@ -204,7 +204,7 @@ public class UserLogin extends JFrame {
 			
 			}
 		});
-		btnHome.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnHome.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnHome.setBounds(222, 291, 215, 38);
 		contentPane.add(btnHome);
 	}

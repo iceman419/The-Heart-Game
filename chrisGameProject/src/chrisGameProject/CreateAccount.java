@@ -65,33 +65,33 @@ public class CreateAccount extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("New User Register");
-		lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 24));
+		lblNewLabel.setFont(new Font("Verdana", Font.BOLD, 24));
 		lblNewLabel.setBounds(240, 10, 264, 67);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("First Name");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_1.setBounds(40, 105, 95, 32);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_1.setBounds(23, 105, 112, 32);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Username");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_2.setBounds(40, 156, 95, 31);
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_2.setBounds(23, 156, 95, 31);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Email Id");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_3.setBounds(46, 208, 89, 34);
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_3.setBounds(23, 209, 89, 34);
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Password");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_4.setBounds(452, 163, 89, 27);
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_4.setBounds(436, 158, 89, 27);
 		contentPane.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Confirm Password");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_5.setBounds(452, 213, 155, 27);
+		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_5.setBounds(436, 213, 171, 27);
 		contentPane.add(lblNewLabel_5);
 		
 		firstnameTF = new JTextField();
@@ -223,7 +223,7 @@ public class CreateAccount extends JFrame {
 			    
 
 			}	});
-		registerBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		registerBtn.setFont(new Font("Tahoma", Font.BOLD, 18));
 		registerBtn.setBounds(240, 257, 137, 32);
 		contentPane.add(registerBtn);
 		
@@ -238,8 +238,8 @@ public class CreateAccount extends JFrame {
 			    confirmpasswordPF.setText("");	
 			}
 		});
-		resetBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		resetBtn.setBounds(550, 257, 85, 32);
+		resetBtn.setFont(new Font("Tahoma", Font.BOLD, 18));
+		resetBtn.setBounds(540, 257, 95, 32);
 		contentPane.add(resetBtn);
 		
 		JButton exitBtn = new JButton("Exit");
@@ -251,7 +251,7 @@ public class CreateAccount extends JFrame {
 				frame.setLocationRelativeTo(null);
 			}
 		});
-		exitBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		exitBtn.setFont(new Font("Tahoma", Font.BOLD, 18));
 		exitBtn.setBounds(692, 257, 85, 32);
 		contentPane.add(exitBtn);
 		
@@ -264,13 +264,13 @@ public class CreateAccount extends JFrame {
 				ul.setVisible(true);
 			}
 		});
-		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnNewButton_3.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnNewButton_3.setBounds(250, 299, 367, 37);
 		contentPane.add(btnNewButton_3);
 		
 		JLabel lblNewLabel_6 = new JLabel("Last Name");
-		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_6.setBounds(452, 110, 112, 27);
+		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_6.setBounds(436, 108, 112, 27);
 		contentPane.add(lblNewLabel_6);
 		
 		lastnameTF = new JTextField();

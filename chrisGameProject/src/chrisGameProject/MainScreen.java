@@ -65,8 +65,8 @@ public class MainScreen extends JFrame {
 				ul.setVisible(true);			
 				}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton.setBounds(193, 139, 171, 42);
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnNewButton.setBounds(193, 139, 183, 42);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Create Account");
@@ -78,8 +78,8 @@ public class MainScreen extends JFrame {
 				ca.setVisible(true);
 			}
 		});
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton_1.setBounds(193, 191, 171, 42);
+		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnNewButton_1.setBounds(193, 191, 183, 42);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Exit Game");
@@ -88,8 +88,8 @@ public class MainScreen extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton_2.setBounds(193, 243, 171, 42);
+		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnNewButton_2.setBounds(193, 243, 183, 42);
 		contentPane.add(btnNewButton_2);
 		
 		JButton btnPlay = new JButton("Play");
@@ -100,8 +100,8 @@ public class MainScreen extends JFrame {
 		
 			}
 		});
-		btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnPlay.setBounds(193, 87, 171, 42);
+		btnPlay.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnPlay.setBounds(193, 87, 183, 42);
 		contentPane.add(btnPlay);
 	}
 

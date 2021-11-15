@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -13,19 +14,18 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
 
-public class ScoreBoard extends JFrame {
+public class MyScore extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTable table_1;
-	private JButton btnBack;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -34,7 +34,7 @@ public class ScoreBoard extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ScoreBoard frame = new ScoreBoard();
+					MyScore frame = new MyScore();
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
@@ -47,30 +47,47 @@ public class ScoreBoard extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ScoreBoard() {
-		setTitle("All Players ScoreBoard");
+	public MyScore() {
+		setFont(new Font("Dialog", Font.BOLD, 12));
+		setTitle("My Score Board");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 794, 591);
+		setBounds(100, 100, 795, 580);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(204, 204, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblscoreboard = new JLabel("Score Board");
-		lblscoreboard.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblscoreboard.setBounds(291, 13, 167, 29);
-		contentPane.add(lblscoreboard);
+		JLabel lblMyscore = new JLabel("My Score Board");
+		lblMyscore.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblMyscore.setBounds(277, 10, 205, 32);
+		contentPane.add(lblMyscore);
 		
-		JButton btnallps = new JButton("Show All Players Score");
-		btnallps.addActionListener(new ActionListener() {
+		JButton btnMyscoreBB = new JButton("Back");
+		btnMyscoreBB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
+				UserCookies UCookies = new UserCookies();
+				UCookies.setVisible(true);
+				UCookies.setLocationRelativeTo(null);
+			}
+		});
+		btnMyscoreBB.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnMyscoreBB.setBounds(10, 19, 85, 38);
+		contentPane.add(btnMyscoreBB);
+		
+		JButton btnmyScore = new JButton("Show My Score");
+		btnmyScore.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+
 				 try
 					{
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gamepdb","root","");
 					Statement stat = con.createStatement();
-					String sql= "select * from Scoreboard";
+					String user = UserLogin.usernameTF.getText();
+					String sql= "select * from Scoreboard where Username='"+user+"'";
 					ResultSet rs = stat.executeQuery(sql);
 					
 					while (rs.next())// data will be added until finish
@@ -86,54 +103,46 @@ public class ScoreBoard extends JFrame {
 							//string array for storing the data into the jtable;
 					
 					String tbData[] = {serial,date,time,username,score};
-					DefaultTableModel tblModel = (DefaultTableModel) table_1.getModel();
+					DefaultTableModel tblModel = (DefaultTableModel) table.getModel();
 					
 					// add string arry data into table_1
 					tblModel.addRow(tbData);
 					
-					}	
+					}	    
 				    }
 				   catch(Exception y){
 				   System.out.println(y);
 				   
 				    }
+			
+			
 			}
 		});
-		btnallps.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnallps.setBounds(291, 404, 250, 129);
-		contentPane.add(btnallps);
+		btnmyScore.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnmyScore.setBounds(315, 404, 179, 129);
+		contentPane.add(btnmyScore);
 		
-		table_1 = new JTable();
-		table_1.setBackground(Color.WHITE);
-		table_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		table_1.setForeground(Color.black);
-		table_1.setModel(new DefaultTableModel(
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(227, 72, 11, -9);
+		contentPane.add(tabbedPane);
+		
+		table = new JTable();
+		table.setBackground(Color.WHITE);
+		table.setFont(new Font("Tahoma", Font.BOLD, 15));
+		table.setForeground(Color.black);
+		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"Serial", "Date", "Time", "Username     ", "Score"},
+				{"serial", "Date", "Time", "Username", "Score"},
 			},
 			new String[] {
 				"New column", "New column", "New column", "New column", "New column"
 			}
 		));
-		table_1.getColumnModel().getColumn(0).setPreferredWidth(32);
-		table_1.getColumnModel().getColumn(1).setPreferredWidth(74);
-		table_1.getColumnModel().getColumn(2).setPreferredWidth(137);
-		table_1.getColumnModel().getColumn(3).setPreferredWidth(174);
-		table_1.getColumnModel().getColumn(4).setPreferredWidth(37);
-		table_1.setBounds(21, 74, 728, 320);
-		contentPane.add(table_1);
-		
-		btnBack = new JButton("Back");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				UserCookies UCookies = new UserCookies();
-				UCookies.setVisible(true);
-				UCookies.setLocationRelativeTo(null);
-			}
-		});
-		btnBack.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnBack.setBounds(10, 17, 85, 21);
-		contentPane.add(btnBack);
+		table.getColumnModel().getColumn(0).setPreferredWidth(34);
+		table.getColumnModel().getColumn(2).setPreferredWidth(171);
+		table.getColumnModel().getColumn(3).setPreferredWidth(163);
+		table.getColumnModel().getColumn(4).setPreferredWidth(38);
+		table.setBounds(111, 60, 598, 320);
+		contentPane.add(table);
 	}
 }
