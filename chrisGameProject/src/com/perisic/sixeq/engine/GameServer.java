@@ -24,9 +24,5 @@ public class GameServer {
 		URL url = new URL(urlLocation);
 		int solution  = i % 10; 
 		return new Game(url, solution);
-		
-		
 	}
-
-
 }

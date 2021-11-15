@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -36,7 +35,8 @@ public class UserLogin extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private  JTextField usernameTF;
+	//Made public static because it allows input fron the JTextField to accessable from anywhere in the project Package
+    public static JTextField usernameTF; 
 	private JPasswordField passwordPF;
 	
 
@@ -45,15 +45,18 @@ public class UserLogin extends JFrame {
 	 */
 	
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					UserLogin frame = new UserLogin();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
+			
 		});
 		
 	}
@@ -125,15 +128,16 @@ public class UserLogin extends JFrame {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gamepdb","root","");
 				Statement stat = con.createStatement();
-				String sql = "select * from user_details where username='"+usernameTF.getText()+"' and password = '"+hash(passwordPF.getText())+"'";
+				String username = usernameTF.getText();
+				String sql = "select * from user_details where username='"+username+"' and password = '"+hash(passwordPF.getText())+"'";
 				ResultSet rs = stat.executeQuery(sql);
 				if(rs.next()) {
 					Icon icon = new javax.swing.ImageIcon(getClass().getResource("Wellcome Heart.png"));
-					JOptionPane.showMessageDialog(null,usernameTF.getText() +" Your Login Was Successful!!", "Authentication", JOptionPane.INFORMATION_MESSAGE,icon);
+					JOptionPane.showMessageDialog(null,username +" Your Login Was Successful!!", "Authentication", JOptionPane.INFORMATION_MESSAGE,icon);
 					//JOptionPane.showMessageDialog(null, usernameTF.getText(), "Welcome To Heart Game", JOptionPane.INFORMATION_MESSAGE,icon);
 					
                     dispose();
-                   
+                  
                     NativeInterface.open();
     				JFrame sdf = new JFrame("Heart Game Demo");
     				sdf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
@@ -142,13 +146,14 @@ public class UserLogin extends JFrame {
     				sdf.setVisible(true);
     			
             		
-            		JButton button = new JButton("Skip Demo");
+            	    JButton button = new JButton("Skip Demo");
                     button.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                     sdf.dispose();
-                    GameGUI myGUI = new GameGUI();
-                    myGUI.setLocationRelativeTo(null);
-                    myGUI.setVisible(true);
+                    
+            		GameGUI myGUI = new GameGUI();
+            		myGUI.setLocationRelativeTo(null);
+            		myGUI.setVisible(true);
                     	    		
                 	}
                     	});

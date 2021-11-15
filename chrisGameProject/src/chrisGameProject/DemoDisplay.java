@@ -3,9 +3,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.tools.Tool;
-
-import com.perisic.sixeq.peripherals.GameGUI;
 import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 import java.awt.BorderLayout;
@@ -17,7 +14,7 @@ import java.awt.event.ActionListener;
 public class DemoDisplay {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		NativeInterface.open();
 		
 		SwingUtilities.invokeLater(new Runnable() {
@@ -26,20 +23,12 @@ public class DemoDisplay {
 				sdf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
 				sdf.getContentPane().add(getBrowser(),BorderLayout.CENTER);
 				sdf.setBounds(350, 150, 690, 400);
-				//sdf.setSize(690, 400);
 				sdf.setVisible(true);
-				
-				
-				
-		
+
 				JButton button = new JButton("Skip Demo");
         		button.addActionListener(new ActionListener() {
         			public void actionPerformed(ActionEvent e) {
-                		sdf.dispose();
-        				GameGUI myGUI = new GameGUI();
-        	    		myGUI.setLocationRelativeTo(null);
-        	    		myGUI.setVisible(true);
-        	    		
+        				
         			}
         		});
         		
@@ -62,12 +51,13 @@ public class DemoDisplay {
 			
 		}));
 	}
-	//this method will return panel with video
+	   //this method will return panel with video
 		public static JPanel getBrowser() {
 			JPanel wbPanel = new JPanel(new BorderLayout());
 			JWebBrowser wb = new JWebBrowser();
 			wbPanel.add(wb, BorderLayout.CENTER);
 			wb.setBarsVisible(false);
+			//wb.navigate("https://www.youtube.com/watch_popup?v=cvi8A2XCK94");
 			wb.navigate("https://youtu.be/277DpPflEvg./watch_popup?"); // use watch popup for fullscreen
 			
 			return wbPanel;

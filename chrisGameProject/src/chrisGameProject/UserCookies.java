@@ -1,15 +1,11 @@
 package chrisGameProject;
-
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
 import com.perisic.sixeq.peripherals.GameGUI;
-
 import javax.swing.Icon;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -19,8 +15,12 @@ import java.awt.Color;
 
 public class UserCookies extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
+	JTextField usernameTF;
 	/**
 	 * Launch the application.
 	 */
@@ -56,14 +56,10 @@ public class UserCookies extends JFrame {
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				DemoGUI dmGUI = new DemoGUI();
-				dmGUI.setLocationRelativeTo(null);
-				dmGUI.setVisible(true);
 				
-				
-				//GameGUI myGUI = new GameGUI();
-	    		//myGUI.setLocationRelativeTo(null);
-	    		//myGUI.setVisible(true);
+				GameGUI myGUI = new GameGUI();
+	    		myGUI.setLocationRelativeTo(null);
+	    		myGUI.setVisible(true);
 
 			}
 		});

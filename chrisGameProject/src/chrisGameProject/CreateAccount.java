@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import java.awt.Color;
@@ -127,22 +128,22 @@ public class CreateAccount extends JFrame {
 				
 			}
 			// password encryption
-			private static String hash(String data) {
+	private static String hash(String data) {
 				//create a string
-				String hashed = "";
-				try {
+	String hashed = "";
+	try {
 					//using messageDigest class to do conversion
 					//creating messageDigest object
-					MessageDigest md5 = MessageDigest.getInstance("MD5");
+	MessageDigest md5 = MessageDigest.getInstance("MD5");
 					// update the md5 object
-					md5.update(data.getBytes());
-					byte[] byteData = md5.digest();
-					StringBuilder sb = new StringBuilder();
-					for (int i = 0; i< byteData.length; i++) {
-						sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+	md5.update(data.getBytes());
+	byte[] byteData = md5.digest();
+	StringBuilder sb = new StringBuilder();
+	for (int i = 0; i< byteData.length; i++) {
+	sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
 					}
-					hashed = sb.toString();
-				}catch (NoSuchAlgorithmException e) {
+	 hashed = sb.toString();
+	}catch (NoSuchAlgorithmException e) {
 					
 				}
 				return hashed;
@@ -160,63 +161,67 @@ public class CreateAccount extends JFrame {
 				String confirm_password = confirmpasswordPF.getText();
 				String confirmpass = hash (confirm_password);//password encryption
 			    String cf = new String (confirm_password);
-			    if (cf.equals(password)) {
-			    	//JOptionPane.showMessageDialog(null, "Password Match");
-			    	 try
-					    {Class.forName("com.mysql.cj.jdbc.Driver");
-						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gamepdb","root","");
-						Statement stat = con.createStatement();
-						String sql = "select * from user_details where username='"+usernameTF.getText()+"' and password='"+passwordPF.getText().toString()+"'";
-						ResultSet rs = stat.executeQuery(sql);
-						//checking before inserting to stop duplicated entries
-						if(rs.next())
-					    	{
-					    		infoMassage("Details Already Registered","Alert!!");
-					    		dispose();
-								UserLogin ul = new UserLogin();
-								ul.setLocationRelativeTo(null);
-								ul.setVisible(true);
-					    	}
-					    	else 
-					    	{
-					    		if(firstnameTF.getText() .isEmpty() ||lastnameTF.getText().isEmpty() ||usernameTF.getText().isEmpty() ||emailTF.getText().isEmpty() ||passwordPF.getText().isEmpty() ||confirmpasswordPF.getText().isEmpty())
-					    		{
-					    			infoMassage("Please Fill In All Fields","Alert!!");
-					    			
-					    		}
-					    		else{
-					    			String insertQuery = "insert into user_details values(null,'"+firstname+"','"+lastname+"','"+username+"','"+pass+"','"+confirmpass+"','"+email+"' )";
-							    	
-								      stat.executeUpdate(insertQuery);  
-								      infoMassage("Details Successfully Registered","Alert!!");
-							    		dispose();
-										UserLogin ul = new UserLogin();
-										ul.setLocationRelativeTo(null);										
-										ul.setVisible(true);
-								      
-					    		}
+				     //Validating Email Address using Regular Expression
+				String emailRegex = "[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+				    Pattern pattern = Pattern.compile(emailRegex);
+		
+	   if(firstnameTF.getText() .isEmpty() ||lastnameTF.getText().isEmpty() ||usernameTF.getText().isEmpty() ||emailTF.getText().isEmpty() ||passwordPF.getText().isEmpty() ||confirmpasswordPF.getText().isEmpty())
+		{
+		 infoMassage("Please Fill In All Fields","Alert!!");
+			return;		//program end     			
+		}
+	   if((pattern.matcher(email).matches())) 
+	   {
 
-					      
-					    	}
+	   }else {
+			 //if Email Address is InValid
+				infoMassage("InValid Email Address","Alert!!");
+				return; //program end
+	   }
 
+	   if (cf.equals(password))
+	   {
+		   
+	   }else {
+		 //if Password Do Not  Match
+	    	infoMassage("Password Do Not  Match","Alert!!");
+	    	return; //program end
+	   }
+	   
+		 try
+		  {
+			 Class.forName("com.mysql.cj.jdbc.Driver");
+		 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gamepdb","root","");
+		 Statement stat = con.createStatement();
+	     String sql = "select * from user_details where username='"+usernameTF.getText()+"' and password='"+passwordPF.getText().toString()+"'";
+		 ResultSet rs = stat.executeQuery(sql);
+		 if(rs.next()) //checking before inserting to stop duplicated entries
+		 {
+		  infoMassage("Details Already Registered","Alert!!");
+		  dispose();
+		  UserLogin ul = new UserLogin();
+		  ul.setLocationRelativeTo(null);
+		  ul.setVisible(true);	 
+		}
+		else
+		{
+			String insertQuery = "insert into user_details values(null,'"+firstname+"','"+lastname+"','"+username+"','"+pass+"','"+confirmpass+"','"+email+"' )";
+			stat.executeUpdate(insertQuery);  
+			 infoMassage("Details Successfully Registered","Alert!!");
+			 dispose();
+			 UserLogin ul = new UserLogin();
+			 ul.setLocationRelativeTo(null);										
+			 ul.setVisible(true);   
+		}
+	
+	  }
+			 catch(Exception y){
+			System.out.println(y);
 					    	
-					    }
-					    catch(Exception y){
-					    	System.out.println(y);
-					    	
-					    }
-					    
-			    }
-			    else
-			    	//JOptionPane.showMessageDialog(null,"Password Do Not  Match");
-			    	infoMassage("Password Do Not  Match","Alert!!");
+			 }	
 			    
-			    
-			    
-			   
-			    
-			}
-		});
+
+			}	});
 		registerBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		registerBtn.setBounds(240, 257, 137, 32);
 		contentPane.add(registerBtn);
@@ -229,8 +234,7 @@ public class CreateAccount extends JFrame {
 			    firstnameTF.setText("");
 				lastnameTF.setText("");
 			    emailTF.setText("");
-			    confirmpasswordPF.setText("");
-	    		
+			    confirmpasswordPF.setText("");	
 			}
 		});
 		resetBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
