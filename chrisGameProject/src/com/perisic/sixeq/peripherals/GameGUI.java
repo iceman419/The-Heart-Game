@@ -13,6 +13,8 @@ import java.time.LocalTime;
 import java.util.TimerTask;
 import javax.swing.*;
 import com.perisic.sixeq.engine.GameEngine;
+
+import chrisGameProject.CreateAccount;
 import chrisGameProject.MainScreen;
 import chrisGameProject.UserCookies;
 import chrisGameProject.UserLogin;
@@ -41,14 +43,14 @@ public class GameGUI extends JFrame implements ActionListener {
 		int score = myGame.getScore(); 
 		
 		if (correct) {
-			System.out.println("YEAH!");
+			//System.out.println("YEAH!");
 			currentGame = myGame.nextGame(); 
 			ImageIcon ii = new ImageIcon(currentGame);
 			questArea.setIcon(ii);
 			infoArea.setText("Good!  Score: "+score);
 			
 		} else { 
-			System.out.println("Not Correct"); 
+			//System.out.println("Not Correct"); 
 			infoArea.setText("Oops. Try again!  Score: "+score);
 		}
 		
@@ -60,8 +62,8 @@ public class GameGUI extends JFrame implements ActionListener {
 	JTextArea infoArea = null;
 	JTextArea infoRemainTime = null;
 	JTextArea usernameDisplay = null;
-	String user =  UserLogin.usernameTF.getText(); //Variable for getting the Users name from userlogin JFrame
 	
+	String user =  UserLogin.dummyvar; //Variable for getting the Users name from userlogin JFrame
 /**
  * Initializes the game. 
  * @param player
@@ -87,7 +89,7 @@ public class GameGUI extends JFrame implements ActionListener {
 		
 		infoRemainTime = new JTextArea(1, 2);
 		
-		usernameDisplay = new JTextArea(1, 30);
+		usernameDisplay = new JTextArea(1, 15);
 		
 		infoArea.setEditable(false);
 		infoArea.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -104,7 +106,7 @@ public class GameGUI extends JFrame implements ActionListener {
 		usernameDisplay.setForeground(Color.blue);
 		
 		java.util.Timer timer = new java.util.Timer();// new timer
-		counter = 20; // setting the counter to 30 seconds
+		counter = 30; // setting the counter to 30 seconds
 		
 		TimerTask task = new TimerTask() {
 			public void run() {
@@ -121,7 +123,8 @@ public class GameGUI extends JFrame implements ActionListener {
 		int score = myGame.getScore();
 		LocalDate dateNow = java.time.LocalDate.now();
 		LocalTime timeNow = java.time.LocalTime.now();
-		String user = UserLogin.usernameTF.getText();
+		String user =  UserLogin.dummyvar;
+		//String user = UserLogin.usernameTF.getText();
 		String sql= "insert into Scoreboard(Serial,Date,Time,Username,Score) values(null,'"+dateNow+"','"+timeNow+"','"+user+"','"+score+"')";
 		stat.executeUpdate(sql);
 					    

@@ -86,8 +86,9 @@ public class MyScore extends JFrame {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gamepdb","root","");
 					Statement stat = con.createStatement();
-					String user = UserLogin.usernameTF.getText();
-					String sql= "select * from Scoreboard where Username='"+user+"'";
+					String user =  UserLogin.dummyvar; //Variable for getting the Users name from userlogin JFrame
+					//String user = UserLogin.usernameTF.getText();
+					String sql= "select * from Scoreboard where Username='"+user+"'" ;
 					ResultSet rs = stat.executeQuery(sql);
 					
 					while (rs.next())// data will be added until finish
@@ -96,13 +97,13 @@ public class MyScore extends JFrame {
 						String serial = String.valueOf(rs.getInt("Serial")); // conversion string to int
 						String date = rs.getString("Date");//Date is a column name 
 						String time = rs.getString("Time");// Time is a column name 
-						String username = rs.getString("Username");// Username is a column name 
+						 user = rs.getString("Username");// Username is a column name 
 						String score = String.valueOf(rs.getInt("Score"));// Score is a column name 
 					
 							
 							//string array for storing the data into the jtable;
 					
-					String tbData[] = {serial,date,time,username,score};
+					String tbData[] = {serial,date,time,user,score};
 					DefaultTableModel tblModel = (DefaultTableModel) table.getModel();
 					
 					// add string arry data into table_1

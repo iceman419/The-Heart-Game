@@ -58,7 +58,7 @@ public class DemoDisplay {
 			wbPanel.add(wb, BorderLayout.CENTER);
 			wb.setBarsVisible(false);
 			//wb.navigate("https://www.youtube.com/watch_popup?v=cvi8A2XCK94");
-			wb.navigate("https://youtu.be/277DpPflEvg./watch_popup?"); // use watch popup for fullscreen
+			wb.navigate("https://youtu.be/4xLocjT4dE4./watch_popup?"); // use watch popup for fullscreen
 			
 			return wbPanel;
 

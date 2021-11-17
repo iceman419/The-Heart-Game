@@ -32,7 +32,7 @@ public class UserLogin extends JFrame {
 	//Made public static because it allows input fron the JTextField to accessable from anywhere in the project Package
     public static JTextField usernameTF; 
 	private JPasswordField passwordPF;
-	
+	public static String dummyvar;
 
 	/**
 	 * Launch the application.
@@ -126,9 +126,16 @@ public class UserLogin extends JFrame {
 				String username = usernameTF.getText();
 				String sql = "select * from user_details where username='"+username+"'|| email_id='"+username+"' and password = '"+hash(passwordPF.getText())+"'";
 				ResultSet rs = stat.executeQuery(sql);
+				//String dummyvar = null;
 				if(rs.next()) {
+					String sql2 = "SELECT `username` FROM `user_details` WHERE `username` = '"+username+"' OR `email_id` = '"+username+"'";
+					ResultSet rs2 = stat.executeQuery(sql2);
+					if (rs2.next())
+					{
+						dummyvar = rs2.getString(1);
+					}
 					Icon icon = new javax.swing.ImageIcon(getClass().getResource("Wellcome Heart.png"));
-					JOptionPane.showMessageDialog(null,username +" Your Login Was Successful!!", "Authentication", JOptionPane.INFORMATION_MESSAGE,icon);
+					JOptionPane.showMessageDialog(null, dummyvar+" Your Login Was Successful!!", "Authentication", JOptionPane.INFORMATION_MESSAGE,icon);
 					//JOptionPane.showMessageDialog(null, usernameTF.getText(), "Welcome To Heart Game", JOptionPane.INFORMATION_MESSAGE,icon);
 					
                     dispose();
@@ -143,8 +150,8 @@ public class UserLogin extends JFrame {
 		    					    			
 		    		}
 					else
-	    			JOptionPane.showMessageDialog(null,"Incorrect Username Or Password");
-	    		usernameTF.setText(" ");
+	    		JOptionPane.showMessageDialog(null,"Incorrect Username Or Password");
+	    		usernameTF.setText("");
 				passwordPF.setText("");
 	    		con.close();
 			} 

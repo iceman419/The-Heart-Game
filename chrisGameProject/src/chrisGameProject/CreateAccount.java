@@ -28,7 +28,7 @@ public class CreateAccount extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField firstnameTF;
-	private JTextField usernameTF;
+	private JTextField usernameTFR;
 	private JTextField emailTF;
 	private JTextField lastnameTF;
 	private JPasswordField passwordPF;
@@ -104,11 +104,11 @@ public class CreateAccount extends JFrame {
 		contentPane.add(firstnameTF);
 		firstnameTF.setColumns(10);
 		
-		usernameTF = new JTextField();
-		usernameTF.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		usernameTF.setBounds(145, 158, 201, 34);
-		contentPane.add(usernameTF);
-		usernameTF.setColumns(10);
+		usernameTFR = new JTextField();
+		usernameTFR.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		usernameTFR.setBounds(145, 158, 201, 34);
+		contentPane.add(usernameTFR);
+		usernameTFR.setColumns(10);
 		
 		emailTF = new JTextField();
 		emailTF.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -155,7 +155,7 @@ public class CreateAccount extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String firstname = firstnameTF.getText();
 				String lastname  = lastnameTF.getText();
-			    String username = usernameTF.getText();
+			    String username = usernameTFR.getText();
 			    String email = emailTF.getText();
 				String password = passwordPF.getText();
 				String pass = hash (password);//password encryption
@@ -166,7 +166,7 @@ public class CreateAccount extends JFrame {
 				String emailRegex = "[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 				    Pattern pattern = Pattern.compile(emailRegex);
 		
-	   if(firstnameTF.getText() .isEmpty() ||lastnameTF.getText().isEmpty() ||usernameTF.getText().isEmpty() ||emailTF.getText().isEmpty() ||passwordPF.getText().isEmpty() ||confirmpasswordPF.getText().isEmpty())
+	   if(firstnameTF.getText() .isEmpty() ||lastnameTF.getText().isEmpty() ||usernameTFR.getText().isEmpty() ||emailTF.getText().isEmpty() ||passwordPF.getText().isEmpty() ||confirmpasswordPF.getText().isEmpty())
 		{
 		 infoMassage("Please Fill In All Fields","Alert!!");
 			return;		//program end     			
@@ -191,21 +191,29 @@ public class CreateAccount extends JFrame {
 	   
 		 try
 		  {
-			 Class.forName("com.mysql.cj.jdbc.Driver");
+		 Class.forName("com.mysql.cj.jdbc.Driver");
 		 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gamepdb","root","");
 		 Statement stat = con.createStatement();
-	     String sql = "select * from user_details where username='"+usernameTF.getText()+"'&& email_id= '"+emailTF.getText()+"' and password='"+passwordPF.getText().toString()+"'";
+	     String sql = "select * from user_details where username='"+usernameTFR.getText()+"' and password='"+passwordPF.getText().toString()+"'";
 		 ResultSet rs = stat.executeQuery(sql);
+		 String checker = null;
 		 if(rs.next()) //checking before inserting to stop duplicated entries
 		 {
-		  infoMassage("Details Already Registered","Alert!!");
-		  dispose();
-		  UserLogin ul = new UserLogin();
-		  ul.setLocationRelativeTo(null);
-		  ul.setVisible(true);	 
-		}
-		else
-		{
+			 checker =  rs.getString(1);
+		 }
+		 	if (checker != null)
+		 	{
+		 		infoMassage("Details Already Registered","Alert!!");
+		 		dispose();
+		 		UserLogin ul = new UserLogin();
+		 		ul.setLocationRelativeTo(null);
+		 		ul.setVisible(true);	 
+		 	}
+		 
+		  
+		
+		 	else
+		 	{
 			String insertQuery = "insert into user_details values(null,'"+firstname+"','"+lastname+"','"+username+"','"+pass+"','"+confirmpass+"','"+email+"' )";
 			stat.executeUpdate(insertQuery);  
 			 infoMassage("Details Successfully Registered","Alert!!");
@@ -213,7 +221,7 @@ public class CreateAccount extends JFrame {
 			 UserLogin ul = new UserLogin();
 			 ul.setLocationRelativeTo(null);										
 			 ul.setVisible(true);   
-		}
+		 	}
 	
 	  }
 			 catch(Exception y){
@@ -230,7 +238,7 @@ public class CreateAccount extends JFrame {
 		JButton resetBtn = new JButton("Reset");
 		resetBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				usernameTF.setText(" ");
+				usernameTFR.setText(" ");
 				passwordPF.setText("");
 			    firstnameTF.setText("");
 				lastnameTF.setText("");

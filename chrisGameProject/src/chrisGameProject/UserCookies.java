@@ -81,7 +81,7 @@ public class UserCookies extends JFrame {
                 	});
                		
        		    sdf.getContentPane().add(button,BorderLayout.EAST);
-        		button.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        		button.setFont(new Font("Tahoma", Font.BOLD, 18));
         		button.setForeground(Color.black);
 		        button.setBackground(new Color(204, 204, 255));
         		sdf.setVisible(true);
