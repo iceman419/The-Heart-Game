@@ -78,11 +78,25 @@ public class MyScore extends JFrame {
 		
 		JButton btnmyScore = new JButton("Show My Score");
 		btnmyScore.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-
+			public void actionPerformed(ActionEvent e) 
+			{
 				 try
+				 { 
+					
+					DefaultTableModel tbd = new DefaultTableModel();//Clearing the Entire JTable Out
+					//Creating a List of Strings that will be Visible as Columns on The Table
+					String tbData1[] = new String[]{"Serial","Date","Time","Username","Score"};
+				
+					for (int i =0;i< tbData1.length;i++)
 					{
+						tbd.addColumn("");
+						
+					}
+					table.setModel(tbd);
+					tbd.addRow(tbData1);
+					
+
+					
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gamepdb","root","");
 					Statement stat = con.createStatement();
@@ -90,26 +104,33 @@ public class MyScore extends JFrame {
 					//String user = UserLogin.usernameTF.getText();
 					String sql= "select * from Scoreboard where Username='"+user+"'" ;
 					ResultSet rs = stat.executeQuery(sql);
-					
 					while (rs.next())// data will be added until finish
 						
 					{
+						 
 						String serial = String.valueOf(rs.getInt("Serial")); // conversion string to int
 						String date = rs.getString("Date");//Date is a column name 
 						String time = rs.getString("Time");// Time is a column name 
-						 user = rs.getString("Username");// Username is a column name 
+						user = rs.getString("Username");// Username is a column name 
 						String score = String.valueOf(rs.getInt("Score"));// Score is a column name 
+						
+					
 					
 							
-							//string array for storing the data into the jtable;
-					
-					String tbData[] = {serial,date,time,user,score};
-					DefaultTableModel tblModel = (DefaultTableModel) table.getModel();
-					
+					//string array for storing the data into the jtable;
+						DefaultTableModel tblModel = (DefaultTableModel) table.getModel();
+						
+						
+    					table.setModel(tblModel);
+    					
+    					String tbData[] = {serial,date,time,user,score};
+    					
 					// add string arry data into table_1
 					tblModel.addRow(tbData);
+				
 					
-					}	    
+					}	
+					
 				    }
 				   catch(Exception y){
 				   System.out.println(y);
@@ -131,16 +152,24 @@ public class MyScore extends JFrame {
 		table.setBackground(Color.WHITE);
 		table.setFont(new Font("Tahoma", Font.BOLD, 15));
 		table.setForeground(Color.black);
+		table.setEnabled(false);// make table uneditable
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"serial", "Date", "Time", "Username", "Score"},
+				{"Serial", "Date", "Time", "Username", "Score"},
 			},
 			new String[] {
 				"New column", "New column", "New column", "New column", "New column"
 			}
-		));
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 		table.getColumnModel().getColumn(0).setPreferredWidth(34);
-		table.getColumnModel().getColumn(2).setPreferredWidth(171);
+		table.getColumnModel().getColumn(2).setPreferredWidth(220);
 		table.getColumnModel().getColumn(3).setPreferredWidth(163);
 		table.getColumnModel().getColumn(4).setPreferredWidth(38);
 		table.setBounds(111, 60, 598, 320);

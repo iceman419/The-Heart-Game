@@ -67,6 +67,19 @@ public class ScoreBoard extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				 try
 					{
+						DefaultTableModel tbd = new DefaultTableModel();//Clearing the Entire JTable Out
+						//Creating a List of Strings that will be Visible as Columns on The Table
+						String tbData1[] = new String[]{"Serial","Date","Time","Username","Score"};
+					
+						for (int i =0;i< tbData1.length;i++)
+						{
+							tbd.addColumn("");
+							
+						}
+						table_1.setModel(tbd);
+						tbd.addRow(tbData1);
+						
+					 
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gamepdb","root","");
 					Statement stat = con.createStatement();
@@ -106,6 +119,7 @@ public class ScoreBoard extends JFrame {
 		table_1 = new JTable();
 		table_1.setBackground(Color.WHITE);
 		table_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		table_1.setEnabled(false);// make table uneditable
 		table_1.setForeground(Color.black);
 		table_1.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -114,7 +128,14 @@ public class ScoreBoard extends JFrame {
 			new String[] {
 				"New column", "New column", "New column", "New column", "New column"
 			}
-		));
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 		table_1.getColumnModel().getColumn(0).setPreferredWidth(32);
 		table_1.getColumnModel().getColumn(1).setPreferredWidth(74);
 		table_1.getColumnModel().getColumn(2).setPreferredWidth(137);

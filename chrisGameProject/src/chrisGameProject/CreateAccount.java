@@ -145,6 +145,7 @@ public class CreateAccount extends JFrame {
 					}
 	 hashed = sb.toString();
 	}catch (NoSuchAlgorithmException e) {
+		
 					
 				}
 				return hashed;
@@ -190,42 +191,27 @@ public class CreateAccount extends JFrame {
 	   }
 	   
 		 try
+		 //If the Username and Email are not unique, then it would proceed to adding the rest of the deatils to the database,due to the implementation of a try method
+		 // Else The database will throw an error and a Message box is displayed due to the implementation of a catch method
 		  {
 		 Class.forName("com.mysql.cj.jdbc.Driver");
 		 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gamepdb","root","");
 		 Statement stat = con.createStatement();
-	     String sql = "select * from user_details where username='"+usernameTFR.getText()+"' and password='"+passwordPF.getText().toString()+"'";
-		 ResultSet rs = stat.executeQuery(sql);
-		 String checker = null;
-		 if(rs.next()) //checking before inserting to stop duplicated entries
-		 {
-			 checker =  rs.getString(1);
-		 }
-		 	if (checker != null)
-		 	{
-		 		infoMassage("Details Already Registered","Alert!!");
-		 		dispose();
-		 		UserLogin ul = new UserLogin();
-		 		ul.setLocationRelativeTo(null);
-		 		ul.setVisible(true);	 
-		 	}
-		 
-		  
-		
-		 	else
-		 	{
-			String insertQuery = "insert into user_details values(null,'"+firstname+"','"+lastname+"','"+username+"','"+pass+"','"+confirmpass+"','"+email+"' )";
-			stat.executeUpdate(insertQuery);  
-			 infoMassage("Details Successfully Registered","Alert!!");
-			 dispose();
-			 UserLogin ul = new UserLogin();
-			 ul.setLocationRelativeTo(null);										
-			 ul.setVisible(true);   
-		 	}
+		 String insertQuery = "insert into user_details values(null,'"+firstname+"','"+lastname+"','"+username+"','"+pass+"','"+confirmpass+"','"+email+"' )";
+		 stat.executeUpdate(insertQuery);  
+		 infoMassage("Details Successfully Registered","Alert!!");
+	 	 dispose();
+	 	 UserLogin ul = new UserLogin();
+	 	 ul.setLocationRelativeTo(null);
+	 	 ul.setVisible(true);	
 	
 	  }
 			 catch(Exception y){
-			System.out.println(y);
+				 infoMassage("Details Already Registered","Alert!!");
+			 	 dispose();
+			 	 UserLogin ul = new UserLogin();
+			     ul.setLocationRelativeTo(null);
+			 	 ul.setVisible(true);	
 					    	
 			 }	
 			    

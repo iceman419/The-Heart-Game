@@ -31,6 +31,7 @@ public class GameGUI extends JFrame implements ActionListener {
 	//Variable for the timer
      int counter = 0;
      Boolean isIt = false;
+     
 
  	/**
  	 * Method that is called when a button has been pressed.
@@ -137,7 +138,7 @@ public class GameGUI extends JFrame implements ActionListener {
 	Icon icon = new javax.swing.ImageIcon(getClass().getResource("EndGame.jpg"));
 	int tryAgain = JOptionPane.showConfirmDialog(null,"Do You Want to Try Again ", "Time Out!" + " Sorry " + user+" You Ran Out Of Time",JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,icon);
 	if(tryAgain == JOptionPane.YES_OPTION)
-  {			
+  {	   dispose();	
 	   GameGUI myGUI = new GameGUI();
 	   myGUI.setLocationRelativeTo(null);
 	   myGUI.setVisible(true);
