@@ -114,10 +114,15 @@ public class UserLogin extends JFrame {
 					
 				}
 				return hashed;
+				
+				
 			}// password decryption ENDS
 			
 		@SuppressWarnings("deprecation")
+
 		public void actionPerformed(ActionEvent e) {
+			
+			
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gamepdb","root","");
@@ -132,6 +137,7 @@ public class UserLogin extends JFrame {
 					if (rs2.next())
 					{
 						dummyvar = rs2.getString(1);
+						
 					}
 					Icon icon = new javax.swing.ImageIcon(getClass().getResource("Wellcome Heart.png"));
 					JOptionPane.showMessageDialog(null, dummyvar+" Your Login Was Successful!!", "Authentication", JOptionPane.INFORMATION_MESSAGE,icon);

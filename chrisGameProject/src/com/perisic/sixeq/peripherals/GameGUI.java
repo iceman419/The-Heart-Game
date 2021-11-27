@@ -78,6 +78,7 @@ public class GameGUI extends JFrame implements ActionListener {
 
 		// Displays the Time Left
 		JLabel lblNewLabel_2 = new JLabel("Time Left");
+		
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNewLabel_2.setForeground(Color.black);
 		lblNewLabel_2.setBounds(71, 146, 89, 22);
@@ -109,6 +110,7 @@ public class GameGUI extends JFrame implements ActionListener {
 		java.util.Timer timer = new java.util.Timer();// new timer
 		counter = 30; // setting the counter to 30 seconds
 		
+		
 		TimerTask task = new TimerTask() {
 			public void run() {
 				infoRemainTime.setText(Integer.toString(counter));// the timer label to counter
@@ -126,7 +128,8 @@ public class GameGUI extends JFrame implements ActionListener {
 		LocalTime timeNow = java.time.LocalTime.now();
 		String user =  UserLogin.dummyvar;
 		//String user = UserLogin.usernameTF.getText();
-		String sql= "insert into Scoreboard(Serial,Date,Time,Username,Score) values(null,'"+dateNow+"','"+timeNow+"','"+user+"','"+score+"')";
+		String sql= "i"
+				+ "(Serial,Date,Time,Username,Score) values(null,'"+dateNow+"','"+timeNow+"','"+user+"','"+score+"')";
 		stat.executeUpdate(sql);
 					    
 	    }
