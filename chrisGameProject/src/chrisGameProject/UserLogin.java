@@ -32,7 +32,7 @@ public class UserLogin extends JFrame {
 	//Made public static because it allows input fron the JTextField to accessable from anywhere in the project Package
     public static JTextField usernameTF; 
 	private JPasswordField passwordPF;
-	public static String dummyvar;
+	public static String dummyvar; // made public static so that other method could call this varible in this method
 
 	/**
 	 * Launch the application.
@@ -118,8 +118,6 @@ public class UserLogin extends JFrame {
 			
 		@SuppressWarnings("deprecation")
 		public void actionPerformed(ActionEvent e) {
-			
-
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gamepdb","root","");

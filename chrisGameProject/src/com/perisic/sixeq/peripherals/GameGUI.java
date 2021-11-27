@@ -64,7 +64,7 @@ public class GameGUI extends JFrame implements ActionListener {
 	JTextArea infoRemainTime = null;
 	JTextArea usernameDisplay = null;
 	
-	String user =  UserLogin.dummyvar; //Variable for getting the Users name from userlogin JFrame
+	String user =  UserLogin.dummyvar; //Variable for getting the Users name from userlogin method
 /**
  * Initializes the game. 
  * @param player

@@ -95,8 +95,9 @@ public class GameDemo extends JFrame {
 				JWebBrowser wb = new JWebBrowser();
 				wb.setMinimumSize(new Dimension(420,268));
 				dummy.add(wb, BorderLayout.CENTER);
-				wb.setBarsVisible(false);                                                                                           
-				wb.navigate("https://youtu.be/4xLocjT4dE4./watch_popup?autoplay=1"); // use watch popup for fullscreen
+				wb.setBarsVisible(false);   
+				wb.navigate("https://youtu.be/6dEH_pt1uKc./watch_popup?"); // use watch popup for fullscreen 
+				
 		
 				return dummy;
 

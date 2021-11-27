@@ -32,6 +32,7 @@ public class MainScreen extends JFrame {
 					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
+					
 				}
 			}
 		});
@@ -85,7 +86,14 @@ public class MainScreen extends JFrame {
 		JButton btnNewButton_2 = new JButton("Exit Game");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				int option = JOptionPane.showConfirmDialog(null,"Are you Sure You Want to Exit The Game?", "You Are About to Exit The Game!",JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+				if(option == JOptionPane.YES_OPTION) {
+						dispose();
+						JOptionPane.showMessageDialog(null,"Your Have Successful Exit The Game!! ","Goodbye!!", JOptionPane.INFORMATION_MESSAGE);
+						
+					}else {
+						
+					}	
 			}
 		});
 		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -95,7 +103,7 @@ public class MainScreen extends JFrame {
 		JButton btnPlay = new JButton("Play");
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,"Please You Must Login to Play!!!","Alert",JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null,"Please You Must Login to Play!!!","Alert!!",JOptionPane.INFORMATION_MESSAGE);
 				//JOptionPane.showConfirmDialog(null,"Please You Must Login to Play!!! ","Alert!!",JOptionPane.YES_NO_CANCEL_OPTION);
 		
 			}

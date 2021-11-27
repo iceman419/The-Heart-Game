@@ -22,11 +22,12 @@ import java.awt.Dimension;
 public class UserCookies extends JFrame {
 
 	/**
-	 * 
+	 *   https://github.com/iceman419 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	JTextField usernameTF;
+	String user =  UserLogin.dummyvar; //Variable for getting the Users name from userlogin JFrame
 	
 	JButton btnExitDemo = new JButton("Skip Demo");
 	/**
@@ -84,11 +85,19 @@ public class UserCookies extends JFrame {
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Icon icon = new javax.swing.ImageIcon(getClass().getResource("Wellcome Heart.png"));
-				JOptionPane.showMessageDialog(null," Your Have Successful Logged Out!!", "Authentication", JOptionPane.INFORMATION_MESSAGE,icon);
-				dispose();
-				MainScreen frame = new MainScreen();
-				frame.setVisible(true);
-				frame.setLocationRelativeTo(null);
+				
+				int option = JOptionPane.showConfirmDialog(null,user+" Are you Sure You Want to Logged Out!", "You Are About to Logout!",JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,icon);
+				if(option == JOptionPane.YES_OPTION) {
+						dispose();
+						JOptionPane.showMessageDialog(null,"Your Have Successful Logged Out!! " + user,"Alert!!", JOptionPane.INFORMATION_MESSAGE,icon);
+						MainScreen frame = new MainScreen();
+						frame.setVisible(true);
+						frame.setLocationRelativeTo(null);	
+						
+					}else {
+						
+					}	
+				
 			}
 		});
 		btnLogout.setFont(new Font("Tahoma", Font.BOLD, 16));
