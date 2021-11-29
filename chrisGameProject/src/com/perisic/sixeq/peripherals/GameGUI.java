@@ -78,7 +78,6 @@ public class GameGUI extends JFrame implements ActionListener {
 
 		// Displays the Time Left
 		JLabel lblNewLabel_2 = new JLabel("Time Left");
-		
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNewLabel_2.setForeground(Color.black);
 		lblNewLabel_2.setBounds(71, 146, 89, 22);
@@ -128,8 +127,7 @@ public class GameGUI extends JFrame implements ActionListener {
 		LocalTime timeNow = java.time.LocalTime.now();
 		String user =  UserLogin.dummyvar;
 		//String user = UserLogin.usernameTF.getText();
-		String sql= "i"
-				+ "(Serial,Date,Time,Username,Score) values(null,'"+dateNow+"','"+timeNow+"','"+user+"','"+score+"')";
+		String sql= "insert into Scoreboard(Serial,Date,Time,Username,Score) values(null,'"+dateNow+"','"+timeNow+"','"+user+"','"+score+"')";
 		stat.executeUpdate(sql);
 					    
 	    }
@@ -137,6 +135,7 @@ public class GameGUI extends JFrame implements ActionListener {
 	   System.out.println(y);
 	   
 	    }
+		 
 		 
 	Icon icon = new javax.swing.ImageIcon(getClass().getResource("EndGame.jpg"));
 	int tryAgain = JOptionPane.showConfirmDialog(null,"Do You Want to Try Again ", "Time Out!" + " Sorry " + user+" You Ran Out Of Time",JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,icon);

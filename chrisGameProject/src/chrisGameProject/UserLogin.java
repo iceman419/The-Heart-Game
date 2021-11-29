@@ -136,6 +136,7 @@ public class UserLogin extends JFrame {
 					ResultSet rs2 = stat.executeQuery(sql2);
 					if (rs2.next())
 					{
+						
 						dummyvar = rs2.getString(1);
 						
 					}

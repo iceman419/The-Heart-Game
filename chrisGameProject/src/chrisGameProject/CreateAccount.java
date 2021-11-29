@@ -146,6 +146,7 @@ public class CreateAccount extends JFrame {
 	 hashed = sb.toString();
 	}catch (NoSuchAlgorithmException e) {
 		
+		
 					
 				}
 				return hashed;

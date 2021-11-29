@@ -38,9 +38,7 @@ public class UserCookies extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UserCookies UCookies = new UserCookies();
-					UCookies.setVisible(true);
-					UCookies.setLocationRelativeTo(null);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
